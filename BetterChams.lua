@@ -8,7 +8,7 @@
 local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/BetterChams.lua";
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")
-local VERSION_NUMBER = "1.1"; --- This too
+local VERSION_NUMBER = "1.2"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -25,14 +25,15 @@ local BETTERCHAMS_TAB = gui.Tab(gui.Reference("Visuals"), "vis.betterchams.tab",
 local BETTERCHAMS_LOCAL_GROUP = gui.Groupbox(gui.Reference("Visuals", "BetterChams"), "Local", 15, 15, 600, 600)
 local BETTERCHAMS_LOCAL = gui.Combobox(BETTERCHAMS_LOCAL_GROUP, "vis.betterchams.local", "Material", "Off", "Crystal", "Gold", "Glass", "Dark Chrome", "Pulse", "Speech Info", "Star Blur")
 local BETTERCHAMS_LOCAL_ALPHA = gui.Slider(BETTERCHAMS_LOCAL_GROUP, "vis.betterchams.local.alpha", "Alpha", 255, 0, 255)
+local BETTERCHAMS_LOCAL_SCOPETRANSPARENCY = gui.Checkbox(BETTERCHAMS_LOCAL_GROUP, "vis.betterchams.local.scopetransparency", "Scope Transparency", false)
 
 --- Hand chams stuff
-local BETTERCHAMS_HANDS_GROUP = gui.Groupbox(gui.Reference("Visuals", "BetterChams"), "Hands", 15, 180, 600, 600)
+local BETTERCHAMS_HANDS_GROUP = gui.Groupbox(gui.Reference("Visuals", "BetterChams"), "Hands", 15, 210, 600, 600)
 local BETTERCHAMS_HANDS = gui.Combobox(BETTERCHAMS_HANDS_GROUP, "vis.betterchams.hands", "Material", "Off", "Crystal", "Gold", "Glass", "Dark Chrome", "Pulse", "Speech Info", "Star Blur")
 local BETTERCHAMS_HANDS_ALPHA = gui.Slider(BETTERCHAMS_HANDS_GROUP, "vis.betterchams.hands.alpha", "Alpha", 255, 0, 255)
 
 --- Weapon chams stuff
-local BETTERCHAMS_WEAPON_GROUP = gui.Groupbox(gui.Reference("Visuals", "BetterChams"), "Weapons", 15, 180*2-15, 600, 600)
+local BETTERCHAMS_WEAPON_GROUP = gui.Groupbox(gui.Reference("Visuals", "BetterChams"), "Weapons", 15, 370, 600, 600)
 local BETTERCHAMS_WEAPON = gui.Combobox(BETTERCHAMS_WEAPON_GROUP, "vis.betterchams.hands", "Material", "Off", "Crystal", "Gold", "Glass", "Dark Chrome", "Pulse", "Speech Info", "Star Blur")
 local BETTERCHAMS_WEAPON_ALPHA = gui.Slider(BETTERCHAMS_WEAPON_GROUP, "vis.betterchams.hands.alpha", "Alpha", 255, 0, 255)
 
@@ -110,7 +111,11 @@ local function DrawModelHook(Context)
         if entities.GetLocalPlayer() ~= nil and entities.GetLocalPlayer():IsAlive() then
             if Context:GetEntity():GetName() == entities.GetLocalPlayer():GetName() and BETTERCHAMS_LOCAL:GetValue() > 0 then
                 if mat_local ~= nil then
-                    mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
+                    if entities.GetLocalPlayer():GetPropBool("m_bIsScoped") then
+                        mat_local:AlphaModulate(0.4)
+                    else
+                        mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
+                    end
                     Context:ForcedMaterialOverride(mat_local)
                 end
             end
