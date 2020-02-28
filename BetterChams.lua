@@ -105,10 +105,12 @@ end
 
 local function DrawModelHook(Context)
 
-    if Context:GetEntity():GetName() == entities.GetLocalPlayer():GetName() and BETTERCHAMS_LOCAL:GetValue() > 0 then
-        if mat_local ~= nil then
-            mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
-            Context:ForcedMaterialOverride(mat_local)
+    if entities.GetLocalPlayer() ~= nil and entities.GetLocalPlayer():IsAlive() then
+        if Context:GetEntity():GetName() == entities.GetLocalPlayer():GetName() and BETTERCHAMS_LOCAL:GetValue() > 0 then
+            if mat_local ~= nil then
+                mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
+                Context:ForcedMaterialOverride(mat_local)
+            end
         end
     end
 
