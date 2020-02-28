@@ -8,7 +8,7 @@
 local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/BetterChams.lua";
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")
-local VERSION_NUMBER = "1.0c"; --- This too
+local VERSION_NUMBER = "1.1"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
