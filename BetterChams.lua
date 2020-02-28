@@ -8,7 +8,7 @@
 local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/BetterChams.lua";
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterChams/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")
-local VERSION_NUMBER = "1.0b"; --- This too
+local VERSION_NUMBER = "1.0c"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -105,26 +105,29 @@ end
 
 local function DrawModelHook(Context)
 
-    if entities.GetLocalPlayer() ~= nil and entities.GetLocalPlayer():IsAlive() then
-        if Context:GetEntity():GetName() == entities.GetLocalPlayer():GetName() and BETTERCHAMS_LOCAL:GetValue() > 0 then
-            if mat_local ~= nil then
-                mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
-                Context:ForcedMaterialOverride(mat_local)
+    if Context:GetEntity() ~= nil then
+
+        if entities.GetLocalPlayer() ~= nil and entities.GetLocalPlayer():IsAlive() then
+            if Context:GetEntity():GetName() == entities.GetLocalPlayer():GetName() and BETTERCHAMS_LOCAL:GetValue() > 0 then
+                if mat_local ~= nil then
+                    mat_local:AlphaModulate(BETTERCHAMS_LOCAL_ALPHA:GetValue() / 255)
+                    Context:ForcedMaterialOverride(mat_local)
+                end
             end
         end
-    end
 
-    if Context:GetEntity():GetClass() == "CBaseAnimating" and BETTERCHAMS_HANDS:GetValue() > 0 then
-        if mat_hands ~= nil then
-            mat_hands:AlphaModulate(BETTERCHAMS_HANDS_ALPHA:GetValue() / 255)
-            Context:ForcedMaterialOverride(mat_hands)
+        if Context:GetEntity():GetClass() == "CBaseAnimating" and BETTERCHAMS_HANDS:GetValue() > 0 then
+            if mat_hands ~= nil then
+                mat_hands:AlphaModulate(BETTERCHAMS_HANDS_ALPHA:GetValue() / 255)
+                Context:ForcedMaterialOverride(mat_hands)
+            end
         end
-    end
 
-    if Context:GetEntity():GetClass() == "CPredictedViewModel" and BETTERCHAMS_WEAPON:GetValue() > 0 then
-        if mat_weapon ~= nil then
-            mat_weapon:AlphaModulate(BETTERCHAMS_WEAPON_ALPHA:GetValue() / 255)
-            Context:ForcedMaterialOverride(mat_weapon)
+        if Context:GetEntity():GetClass() == "CPredictedViewModel" and BETTERCHAMS_WEAPON:GetValue() > 0 then
+            if mat_weapon ~= nil then
+                mat_weapon:AlphaModulate(BETTERCHAMS_WEAPON_ALPHA:GetValue() / 255)
+                Context:ForcedMaterialOverride(mat_weapon)
+            end
         end
     end
 end
