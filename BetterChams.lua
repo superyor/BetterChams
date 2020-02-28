@@ -57,7 +57,7 @@ local function updateMaterials()
         elseif BETTERCHAMS_LOCAL:GetValue() == 5 then
             mat_local = materials.Find("models/inventory_items/dogtags/dogtags_outline")
         elseif BETTERCHAMS_LOCAL:GetValue() == 6 then
-            ---mat_local = materials.Find("models/extras/speech_info")
+            mat_local = materials.Find("models/extras/speech_info")
         elseif BETTERCHAMS_LOCAL:GetValue() == 7 then
             mat_local = materials.Find("models/inventory_items/dreamhack_trophies/dreamhack_star_blur")
         end
